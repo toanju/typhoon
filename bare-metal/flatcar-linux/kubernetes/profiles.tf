@@ -53,6 +53,7 @@ data "ct_config" "install" {
     os_channel         = local.channel
     os_version         = var.os_version
     ignition_endpoint  = format("%s/ignition", var.matchbox_http_endpoint)
+    matchbox_endpoint  = var.matchbox_http_endpoint
     mac                = concat(var.controllers.*.mac, var.workers.*.mac)[count.index]
     install_disk       = var.install_disk
     ssh_authorized_key = var.ssh_authorized_key
@@ -69,6 +70,7 @@ data "ct_config" "cached-install" {
     os_channel         = local.channel
     os_version         = var.os_version
     ignition_endpoint  = format("%s/ignition", var.matchbox_http_endpoint)
+    matchbox_endpoint  = var.matchbox_http_endpoint
     mac                = concat(var.controllers.*.mac, var.workers.*.mac)[count.index]
     install_disk       = var.install_disk
     ssh_authorized_key = var.ssh_authorized_key
