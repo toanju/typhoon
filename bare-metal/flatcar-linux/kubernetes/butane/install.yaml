@@ -39,6 +39,18 @@ storage:
             ${baseurl_flag} \
             -i ignition.json
           udevadm settle
+          efipartition=$(lsblk ${install_disk} -J -oLABEL,PATH  | jq -r '.blockdevices[] | select(.label == "EFI-SYSTEM")'.path)
+          #efipartition=$(lsblk ${install_disk} -oLABEL,PATH | awk '$1 == "EFI-SYSTEM" {print $2}')
+          mkdir /tmp/efipartition
+          mount $${efipartition} /tmp/efipartition
+          pushd /tmp/efipartition
+            version=$(curl --silent "${matchbox_endpoint}/assets/uefi/latest-version")
+            curl -LO ${matchbox_endpoint}/assets/uefi/RPi4_UEFI_Firmware_$${version}.zip
+            unzip RPi4_UEFI_Firmware_$${version}.zip
+            rm RPi4_UEFI_Firmware_$${version}.zip
+          popd
+          umount /tmp/efipartition
+          udevadm settle
           systemctl reboot
 passwd:
   users:
