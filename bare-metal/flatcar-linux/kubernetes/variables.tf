@@ -175,3 +175,9 @@ variable "cluster_domain_suffix" {
   default     = "cluster.local"
 }
 
+variable "enable_kube_proxy" {
+  type        = bool
+  description = "Enable kube-proxy"
+  default     = true
+}
+

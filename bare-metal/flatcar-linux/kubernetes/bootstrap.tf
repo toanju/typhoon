@@ -6,6 +6,7 @@ module "bootstrap" {
   api_servers                     = [var.k8s_domain_name]
   etcd_servers                    = var.controllers.*.domain
   networking                      = var.networking
+  enable_kube_proxy               = var.enable_kube_proxy
   network_mtu                     = var.network_mtu
   network_ip_autodetection_method = var.network_ip_autodetection_method
   pod_cidr                        = var.pod_cidr
