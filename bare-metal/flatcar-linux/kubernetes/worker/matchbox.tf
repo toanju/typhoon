@@ -77,12 +77,13 @@ resource "matchbox_profile" "worker" {
 # Flatcar Linux workers
 data "ct_config" "worker" {
   content = templatefile("${path.module}/butane/worker.yaml", {
-    domain_name            = var.domain
-    ssh_authorized_key     = var.ssh_authorized_key
-    cluster_dns_service_ip = cidrhost(var.service_cidr, 10)
-    cluster_domain_suffix  = var.cluster_domain_suffix
-    node_labels            = join(",", var.node_labels)
-    node_taints            = join(",", var.node_taints)
+    domain_name               = var.domain
+    ssh_authorized_key        = var.ssh_authorized_key
+    cluster_dns_service_ip    = cidrhost(var.service_cidr, 10)
+    cluster_dns_service_ip_v6 = cidrhost(var.service_cidr_v6, 10)
+    cluster_domain_suffix     = var.cluster_domain_suffix
+    node_labels               = join(",", var.node_labels)
+    node_taints               = join(",", var.node_taints)
   })
   strict   = true
   snippets = var.snippets

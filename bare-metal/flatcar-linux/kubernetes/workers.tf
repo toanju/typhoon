@@ -18,6 +18,7 @@ module "workers" {
   kubeconfig            = module.bootstrap.kubeconfig-kubelet
   ssh_authorized_key    = var.ssh_authorized_key
   service_cidr          = var.service_cidr
+  service_cidr_v6       = var.service_cidr_v6
   cluster_domain_suffix = var.cluster_domain_suffix
   node_labels           = lookup(var.worker_node_labels, var.workers[count.index].name, [])
   node_taints           = lookup(var.worker_node_taints, var.workers[count.index].name, [])

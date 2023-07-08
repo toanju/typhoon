@@ -155,6 +155,7 @@ storage:
           cgroupDriver: systemd
           clusterDNS:
             - ${cluster_dns_service_ip}
+            - ${cluster_dns_service_ip_v6}
           clusterDomain: ${cluster_domain_suffix}
           healthzPort: 0
           rotateCertificates: true
